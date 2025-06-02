@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoComayagua</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel&display=swap');
+        *{
+            padding:0;
+            margin:0;
+            box-sizing: border-box;
+            list-style: none;
+            text-decoration: none;
+        }
+        body{
+            background-color: #F8F1E5;
+            font-family: 'EB Garamond', serif;
+        }
+        .container{
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .navbar{
+            background-color:#8b3a3a;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;  
+            padding: 8px;
+            position: static;
+        }
+        .menu{
+            display: flex;
+            gap: 20px;
+        }
+        li{
+            color:white;
+            display: inline-block ;
+            margin-right: 20px;
+            transition: all 0.3s ease;
+            font-size:20px;
+        }
+        .navbar a{
+            text-decoration: none;
+            color: white;
+        }
+        .navbar img{
+            width: 200px;
+            object-fit: cover; 
+        }
+        .logo{
+            float: left;
+            overflow: hidden;
+        }
+        #desplegar {
+            position: absolute;
+            left: -10000px;
+        }
+        .mostrar{
+          display: none;
+        }
+        .ocultar {
+          display: none;
+        }
+        li:hover{
+            transform: scale(1.1);
+            text-decoration: underline;
+            font-weight: bold;
+        }
+        .header{
+            background-image: url(img/foto.png);
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            min-height: 70vh;
+            display:flex;
+            align-items: center;
+            background-attachment: fixed;
+        }
+        .header-content{
+            text-align: center;
+        }
+        .header-content h1 {
+            color:white;
+            font-size: 50px;
+        }
+        .header-content p {
+            color: white;
+            font-size: 22px;
+        }
+        .historia{
+            margin-top: 10px;
+            position:relative;
+        }
+        .texto1{
+            text-align: center;
+        }
+        .texto1 h2{
+            color: #2E4057;
+            font-size: 40px;
+        }
+        .texto1 p {
+            color: #4A4A4A;
+            font-size: 22px;
+            text-align: justify;
+        }
+        .text2{
+            margin-top: 20px;
+            position: relative;
+            text-align: center;
+        }
+        .td{
+            color:#2E4057;
+            font-size: 20px;
+        }
+        .festividades{
+            position:absolute;
+            margin-bottom: 20px;
+            width: 30%;
+            height:auto;
+            background-color: #D9A441;
+            border-radius: 20px;
+            height:440px;
+            transition: all 0.5s ease;
+            padding:10px;
+        }
+        .festividades img{
+            width: 100%;
+            border-radius: 20px;
+        }
+        .sitios{
+            position:absolute;
+            margin-left: 420px;
+            width: 30%;
+            height:auto;
+            background-color: #D9A441;
+            border-radius: 20px;
+            height:440px;
+            transition: all 0.5s ease;
+            padding:10px;
+        }
+        .sitios img{
+            width:100%;
+            border-radius: 20px;
+            height:270px;
+        }
+        
+        .lugares{
+            position:absolute;
+            margin-left: 840px;
+            width: 30%;
+            height:auto;
+            background-color: #D9A441;
+            border-radius: 20px;
+            height:440px;
+            transition: all 0.5s ease;
+            padding:10px;
+        }
+        .lugares img{
+            width:100%;
+            border-radius: 20px;
+            height:270px;
+        }
+        .info{
+            text-align: justify;
+            font-size:16px;
+            font-style:bold;
+            color: #4A4A4A;
+
+        }
+        .festividades:hover{
+            transform: scale(1.1);
+            box-shadow: 0px 0px 10px #8B3A3A;
+        }
+        .lugares:hover{
+            transform: scale(1.1);
+            box-shadow: 0px 0px 10px #8B3A3A;
+        }
+        .sitios:hover{
+            transform: scale(1.1);
+            box-shadow: 0px 0px 10px #8B3A3A;
+        }
+        .text2 a{
+            display: inline-block;
+            padding:5px 20px;
+            background-color: #2E4057;
+            color:white;
+            font-size: 20px;
+            border-radius: 5px;
+            transition: all 0.5s ease;
+        }
+        .text2 a:hover{
+            background-color: #F8F1E5;
+            color:#4A4A4A
+        }
+        .festividades a{
+            margin-top:25px;
+        }
+        .sitios a{
+            margin-top: 40px;
+        }
+        .map-section{
+            position: relative;
+            margin-top: 550px;
+            display: flex;
+            align-items: flex-start;
+            gap: 50px;
+            padding: 0 50px;
+        }
+        .ubi{
+            width:605px;
+            border: 2px solid black;
+            transition: all 0.5s ease;
+            flex-shrink: 0;
+        }
+        .ubi iframe{
+            width: 100%;
+            height: 450px;
+        }
+        .ubi:hover{
+            transform: scale(1.1);
+            box-shadow: 0px 0px 15px black;
+        }
+        .tex3{
+            flex: 1;
+            min-width: 300px;
+        }
+        .tex3 h2{
+            font-size: 40px;
+            text-align: center;
+            color:#2E4057;
+            text-shadow: 3px 0px 3px #8B3A3A8b;
+
+        }
+        .video{
+            margin-top: 20px;
+            text-align: center;
+        }
+        .video iframe{
+            width: 100%;
+            max-width: 560px;
+            height: 315px;
+        }
+        .footer{
+            margin-top:50px;
+            background-color: #6A845C;
+            color:white;
+            font-size: 18px;
+            text-align: center;
+            padding:30px;
+        }
+
+        /* RESPONSIVE DESIGN */
+        
+        /* Tablet*/
+        @media screen and (max-width: 900px) {
+            .container1{
+                position: relative;
+                top: 2px;
+                right: 10px;
+                width: 50px;
+                height: 50px;
+                z-index: 30;
+            }
+            .mostrar {
+                display: grid;
+                place-items: center;
+                width: 50px; 
+                height: 50px;
+                background: black;
+                color: white;
+                font-size: 28px;
+                border-radius: 5px;
+            }
+            .ocultar {
+                display: none;
+                grid-area: 1 / 1;
+                place-items: center;
+                width: 50px; 
+                height: 50px;
+                background: black;
+                color: white;
+                font-size: 32px;
+                border-radius: 5px;
+                
+            }
+            #desplegar:checked ~ .container1 label.mostrar  {
+                display: none;
+            }
+            #desplegar:checked ~ .container1 label.ocultar {
+                display: grid;
+            }
+            .menu {
+                position: fixed;
+                top:0;
+                right:0;
+                background-color: #8b3a3a;
+                display: flex;          
+                flex-direction: row;    
+                width: 100vw;           
+                height: 90px;          
+                align-items: center;
+                justify-content: center;    
+                gap: 20px;              
+                padding: 0 1rem;
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+                z-index: 20;
+            }
+            #desplegar:checked ~ .menu {
+                transform: translateX(0);
+            }    
+            
+            .header {
+                min-height: 50vh;
+                background-attachment: scroll;
+            }
+            
+            .header-content h1 {
+                font-size: 32px;
+                margin-bottom: 10px;
+            }
+            
+            .header-content p {
+                font-size: 18px;
+                padding: 0 20px;
+            }
+            
+            .texto1 h2 {
+                font-size: 28px;
+                margin-bottom: 20px;
+            }
+            
+            .texto1 p {
+                font-size: 18px;
+                padding: 0 10px;
+            }
+            
+            .text2 {
+                margin-top: 30px;
+            }
+            
+            .festividades, .sitios, .lugares {
+                position: static;
+                width: 100%;
+                height: auto;
+                margin: 0 0 20px 0;
+                padding: 15px;
+            }
+            
+            .festividades img, .sitios img, .lugares img {
+                height: 200px;
+                object-fit: cover;
+            }
+            
+            .info {
+                font-size: 14px;
+                margin: 10px 0;
+            }
+            
+            .text2 a {
+                font-size: 16px;
+                padding: 8px 16px;
+                margin-top: 10px;
+            }
+            
+            .festividades a, .sitios a {
+                margin-top: 10px;
+            }
+            
+            .map-section {
+                flex-direction: column;
+                margin-top: 30px;
+                padding: 0 15px;
+                gap: 20px;
+            }
+            
+            .ubi {
+                width: 100%;
+                max-width: 100%;
+            }
+            
+            .ubi iframe {
+                height: 300px;
+            }
+            
+            .tex3 h2 {
+                font-size: 24px;
+                margin-bottom: 20px;
+            }
+            
+            .video iframe {
+                height: 200px;
+            }
+            
+            .footer {
+                font-size: 16px;
+                padding: 20px;
+            }
+        }
+        
+        /* Smartphone pequeño */
+        @media screen and (max-width: 480px) {
+            .container1 {
+                position: relative;
+                top: 10px;
+                right: 10px;
+                width: 50px;
+                height: 50px;
+                z-index: 30;
+            }
+            .mostrar {
+                display: grid;
+                place-items: center;
+                width: 50px; 
+                height: 50px;
+                background: black;
+                color: white;
+                font-size: 28px;
+                border-radius: 5px;
+            }
+            .ocultar {
+                display: none;
+                grid-area: 1 / 1;
+                place-items: center;
+                width: 50px; 
+                height: 50px;
+                background: black;
+                color: white;
+                font-size: 32px;
+                border-radius: 5px;
+                
+            }
+            #desplegar:checked ~ .container1 label.mostrar  {
+                display: none;
+            }
+            #desplegar:checked ~ .container1 label.ocultar {
+                display: grid;
+            }
+            .menu {
+                position: fixed;
+                top: 0;
+                right: 0;
+                width: 200px;
+                height: 100vh;
+                background-color: #8b3a3a;
+                display: grid;
+                place-items: center;
+                gap: 20px;
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+                z-index: 20;
+                gap: 20px;
+            }
+            #desplegar:checked ~ .menu {
+                transform: translateX(0);
+            }
+
+            .container {
+                padding: 0 10px;
+            }
+            
+            .header-content h1 {
+                font-size: 28px;
+            }
+            
+            .header-content p {
+                font-size: 16px;
+            }
+            
+            .texto1 h2 {
+                font-size: 24px;
+            }
+            
+            .texto1 p {
+                font-size: 16px;
+            }
+            
+            .festividades, .sitios, .lugares {
+                padding: 12px;
+            }
+            
+            .td {
+                font-size: 18px;
+            }
+            
+            .info {
+                font-size: 13px;
+            }
+            
+            .text2 a {
+                font-size: 14px;
+                padding: 6px 12px;
+            }
+            
+            .ubi iframe {
+                height: 250px;
+            }
+            
+            .tex3 h2 {
+                font-size: 20px;
+            }
+            
+            .video iframe {
+                height: 180px;
+            }
+            
+            .footer {
+                font-size: 14px;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar"> 
+        <div class="logo">
+            <a href="index.html"><img src="img/EcoComayagua (1).png" alt=""></a>
+        </div> 
+
+        <input type="checkbox" id="desplegar">
+
+        <div class="container1">
+            <label for="desplegar" class="mostrar">&#9776;</label>
+            <label for="desplegar" class="ocultar">&times;</label>  
+        </div>
+        <ul class="menu">
+            <li><a  href="FESTIVIDADES.html">Festividades</a></li>
+            <li><a href="lugarescomerciales.html">Sitios Turísticos</a></li>
+            <li><a href="Lugareshistoricos.html">Lugares Historicos</a></li>
+        </ul>        
+    </nav>
+    <section class="header">
+        <div class="header-content container">
+            <h1>BIENVENIDOS A COMAYAGUA</h1>
+            <p>Descubre la historia, cultura y belleza de la antigua capital colonial de honduras</p> 
+        </div>
+    </section>
+    <section class="historia">
+        <div class="texto1 container">
+            <h2>HISTORIA</h2>
+            <p>Comayagua es una de las ciudades más antiguas e históricamente importantes de Honduras. Fue fundada el 8 de diciembre de 1537 por el conquistador español Alonso de Cáceres,
+                bajo el nombre de Santa María de la Concepción de Comayagua, en una región previamente habitada por pueblos indígenas lencas.</p>&nbsp;
+            <p>Durante la época colonial, Comayagua se consolidó como la capital política, religiosa y administrativa de la provincia de Honduras dentro del Reino de Guatemala, siendo sede de importantes instituciones como 
+                el obispado y el gobierno colonial. En este periodo se construyeron imponentes edificios coloniales, como iglesias, conventos y la majestuosa Catedral de la Inmaculada 
+                Concepción, que alberga el reloj más antiguo de América, traído desde España en el siglo XVII.</p>&nbsp;
+            <p>Su estratégica ubicación en el centro del país la convirtió en un punto 
+                clave para el comercio y la administración. Sin embargo, en 1880, durante el gobierno del presidente Marco Aurelio Soto, la capital fue trasladada a Tegucigalpa por razones
+                políticas y económicas, lo que provocó un prolongado estancamiento en el desarrollo de Comayagua. A pesar de ello, la ciudad logró preservar su riqueza arquitectónica y 
+                ultural, lo que ha permitido su resurgimiento como un importante destino turístico y patrimonial. En la actualidad, Comayagua es reconocida por sus tradicionales celebraciones
+                religiosas, especialmente durante la Semana Santa con sus famosas alfombras de aserrín, y por su creciente desarrollo gracias a la presencia de la Base Aérea Enrique Soto 
+                Cano y el Aeropuerto Internacional de Palmerola, que la han devuelto al mapa estratégico de Honduras.
+            </p>
+        </div>
+        <div class="text2 container">
+
+            <div class="festividades">
+                <img src="https://www.honduras.com/wp-content/uploads/2020/10/Comayagua-tradici%C3%B3n.jpg">
+                <p class="td"><b>Festividades</b></p> 
+                <p class="info">
+                    Comayagua, la joya colonial de Honduras, te espera con los 
+                    brazos abiertos para que disfrutes de sus tradicionales festividades, 
+                    llenas de historia, fe y color. 
+                </p>
+                <a href="FESTIVIDADES.html">Conoce más</a>
+            </div>
+            <div class="sitios">
+                <img src="img/sitios.jpg">
+                <p class="td"><b>Sitios turísticos</b></p> 
+                <p class="info">
+                    Recorre su encantador centro histórico, donde cada calle empedrada te cuenta una historia.
+                </p>
+                <a href="lugarescomerciales.html">Conoce más</a>
+            </div>
+            <div class="lugares">
+                <img src="https://departamento19.hn/wp-content/uploads/2021/07/InShot_20210710_154716264-696x522-1.jpg">
+                <p class="td"><b>Lugares históricos</b></p> 
+                <p class="info">
+                    Comayagua es mucho más que una ciudad: es un viaje al pasado. 
+                    Antigua capital del país, conserva con orgullo algunos de los tesoros históricos 
+                    y arquitectónicos más valiosos de Centroamérica.
+                </p>
+                <a href="Lugareshistoricos.html">Conoce más</a>
+            </div>
+        </div> 
+    </section>
+    <div class="map-section container">
+        <div class="ubi">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15453.699353250071!2d-87.64152102680596!3d14.46027753046588!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f65858a775b20fb%3A0xa60842e9df78a360!2sPlaza%20Central%20Le%C3%B3n%20Alvarado!5e0!3m2!1ses-419!2shn!4v1748725109304!5m2!1ses-419!2shn" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div class="tex3">
+            <h2>Visita la ciudad feliz de Honduras</h2>
+            <div class="video">
+                <iframe src="https://www.youtube.com/embed/_5b_q4Wb6YY?si=GCblDlkq-JjAYXtp" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+                    <h4>Información de Contacto</h4>
+                    <p>📍 Centro Histórico de Comayagua</p>
+                    <p>📞 +504 2772-0000</p>
+                    <p>✉️ @ecocomayagua.hn</p>
+                    <div class="footer-bottom"></div><br>
+                <p>&copy; 2025 Eco Comayagua. Todos los derechos reservados. | Desarrollado para promover el turismo en Honduras</p>
+    </footer>
+     
+</body>
+</html>

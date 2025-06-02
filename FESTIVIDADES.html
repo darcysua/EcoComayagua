@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+  <html lang="es" >
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond&display=swap');
+      * {
+        margin: 0; 
+        padding: 0; 
+        box-sizing: border-box;
+      }
+      body {
+        background-color: #c2f2c4;
+        position: relative;
+        height: 100vh;
+        
+      }
+      #desplegar {
+        position: absolute;
+        left: -10000px;
+      }
+      .container {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 50px;
+        height: 50px;
+        z-index: 30;
+      }
+      .mostrar {
+        display: grid;
+        place-items: center;
+        width: 50px; 
+        height: 50px;
+        background: black;
+        color: white;
+        font-size: 28px;
+        border-radius: 5px;
+      }
+      .ocultar {
+        display: none;
+        grid-area: 1 / 1;
+        place-items: center;
+        width: 50px; 
+        height: 50px;
+        background: black;
+        color: white;
+        font-size: 32px;
+        border-radius: 5px;
+        
+      }
+      #desplegar:checked ~ .container label.mostrar  {
+        display: none;
+      }
+      #desplegar:checked ~ .container label.ocultar {
+        display: grid;
+      }
+      .menu {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: #8B3A3A;
+        display: grid;
+        place-items: center;
+        gap: 20px;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        z-index: 20;
+        gap: 20px;
+      }
+
+      .menu div {
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition-duration: 0.5s;
+      }
+
+      .menu > div:hover {
+            background-color: #F8F1E5;
+            color: #8B3A3A;
+            transform: scale(1.1);
+        }
+        .menu a{
+            text-decoration: none;
+            color: white;
+
+        }
+      .menu > div:hover {
+            background-color: #2E4057;
+            color: #8B3A3A;
+            transform: scale(1.1);
+        }
+
+      #desplegar:checked ~ .menu {
+        transform: translateX(0);
+      }
+
+       .CTitulo{
+            font-family: 'Cormorant Garamond', serif;
+            position: absolute;
+            background-color: #2E4057;
+            color: #ffffff;
+            top: 0px;
+            left: 0;
+            height: 100px;
+            width: 100vw;
+            align-content: center;
+            justify-items: center;
+            font-size: 10px;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .contenedor {
+            position: absolute;
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+        }
+        /*Semana Santa*/
+        .SS {
+            position: absolute;
+            background-color: #D9A441;
+            color: #ffffff;
+            top: 120px;
+            left: 5vw;
+            height: 500px;
+            width: 90vw;
+            border-radius: 10px;
+            transition-duration: 0.5s;
+        }
+        .SS > h1 {
+            font-family: 'Cormorant Garamond', serif;
+            padding-left: 10px;
+            padding-top: 10px;
+            
+        }
+         .textSS {
+            position: relative;
+            padding-left: 10px;
+            width: 100%;
+            font-family: 'EB Garamond', serif; 
+            font-size: 9px;
+        }
+         .imgSS {
+            display: flex;
+            position: absolute;
+            width: 90vw;
+            height: 200px;
+            top: 270px;
+            justify-content: center;  
+            align-items: center;
+        }
+
+        .imgSS > img {
+            position: relative;
+            height: 40vw;
+            border-radius: 10px;
+            
+        }
+
+        .extSS {
+            display: none;
+            height: 250px;
+            width: 90vw;
+            padding: 10px;
+            opacity: 0;
+            order: 1;
+        }
+
+        /*baile de los diablitos*/
+        .BD {
+            font-family: 'Cormorant Garamond', serif;
+            position: absolute;
+            background-color: #D9A441;
+            color: #ffffff;
+            top: 530px;
+            left: 0px;
+            height: 500px;
+            width: 90vw;
+            border-radius: 10px;
+            transition-duration: 0.5s;
+        }
+        .BD > h1 {
+            padding-left: 10px;
+            padding-top: 10px;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+         .textBD {
+            position: relative;
+            padding-left: 10px;
+            width: 100%;
+            font-family: 'EB Garamond', serif; 
+            font-size: 9px;
+        }
+         .imgBD {
+            display: flex;
+            position: absolute;
+            width: 90vw;
+            height: 200px;
+            top: 280px;
+            justify-content: center;  
+            align-items: center;
+        }
+
+        .imgBD > img {
+            position: relative;
+            height: 40vw;
+            border-radius: 10px;
+            
+        }
+
+        /*Feria patronal*/
+
+        .FP {
+            font-family: 'Cormorant Garamond', serif;
+            position: absolute;
+            background-color: #D9A441;
+            color: #ffffff;
+            top: 1050px;
+            left: 0px;
+            height: 500px;
+            width: 90vw;
+            border-radius: 10px;
+            transition-duration: 0.5s;
+        }
+        .FP > h1 {
+            padding-left: 10px;
+            padding-top: 10px;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+         .textFP {
+            position: relative;
+            padding-left: 10px;
+            width: 100%;
+            font-family: 'EB Garamond', serif; 
+            font-size: 9px;
+        }
+         .imgFP {
+            display: flex;
+            position: absolute;
+            width: 90vw;
+            height: 200px;
+            top: 280px;
+            justify-content: center;  
+            align-items: center;
+        }
+
+        .imgFP > img {
+            position: relative;
+            height: 40vw;
+            border-radius: 10px;
+            
+        }
+
+        /*12 Campanas*/
+
+        .DC {
+            font-family: 'Cormorant Garamond', serif;
+            position: absolute;
+            background-color: #D9A441;
+            color: #ffffff;
+            top: 1570px;
+            left: 0px;
+            height: 500px;
+            width: 90vw;
+            border-radius: 10px;
+            transition-duration: 0.5s;
+        }
+        .DC > h1 {
+            padding-left: 10px;
+            padding-top: 10px;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+         .textDC {
+            position: relative;
+            padding-left: 10px;
+            width: 100%;
+            font-family: 'EB Garamond', serif; 
+            font-size: 9px;
+        }
+         .imgDC {
+            display: flex;
+            position: absolute;
+            width: 90vw;
+            height: 200px;
+            top: 280px;
+            justify-content: center;  
+            align-items: center;
+        }
+
+        .imgDC > img {
+            position: relative;
+            height: 40vw;
+            border-radius: 10px;
+            
+        }
+
+
+        @media screen and (min-width: 481px) and (max-width: 900px){
+            .menu {
+            display: flex;          
+            flex-direction: row;    
+            width: 100vw;           
+            height: 100px;          
+            align-items: center;    
+            gap: 20px;              
+            padding: 0 1rem;
+            }
+
+            .menu div {
+                padding: 10px 20px;
+                border-radius: 5px;
+                transition-duration: 0.5s;
+            }
+
+            .menu > div:hover {
+                background-color: #F8F1E5;
+                color: #8B3A3A;
+                transform: scale(1.1);
+            }
+
+
+            /*Semana Santa*/
+            .SS {
+                position: absolute;
+                background-color: #D9A441;
+                color: #ffffff;
+                top: 120px;
+                left: 5vw;
+                height: 500px;
+                width: 90vw;
+                border-radius: 10px;
+                transition-duration: 0.5s;
+            }
+            .SS > h1 {
+                font-family: 'Cormorant Garamond', serif;
+                padding-left: 10px;
+                padding-top: 10px;
+                
+            }
+            .textSS {
+                position: relative;
+                padding-left: 10px;
+                width: 100%;
+                font-family: 'EB Garamond', serif; 
+                font-size: 9px;
+            }
+            .imgSS {
+                display: flex;
+                position: absolute;
+                width: 90vw;
+                height: 200px;
+                top: 230px;
+                justify-content: center;  
+                align-items: center;
+            }
+
+            .imgSS > img {
+                position: relative;
+                height: 30vw;
+                border-radius: 10px;
+                
+            }
+
+            /*baile de los diablitos*/
+            .BD {
+                position: absolute;
+                background-color: #D9A441;
+                color: #ffffff;
+                top: 530px;
+                left: 0px;
+                height: 500px;
+                width: 90vw;
+                border-radius: 10px;
+                transition-duration: 0.5s;
+            }
+            .BD > h1 {
+                font-family: 'Cormorant Garamond', serif;
+                padding-left: 10px;
+                padding-top: 10px;
+                
+            }
+            .textBD {
+                position: relative;
+                padding-left: 10px;
+                width: 100%;
+                font-family: 'EB Garamond', serif; 
+                font-size: 9px;
+            }
+            .imgBD {
+                display: flex;
+                position: absolute;
+                width: 90vw;
+                height: 200px;
+                top: 230px;
+                justify-content: center;  
+                align-items: center;
+            }
+
+            .imgBD > img {
+                position: relative;
+                height: 30vw;
+                border-radius: 10px;
+                
+            }
+
+            /*Feria patronal*/
+            .FP {
+                position: absolute;
+                background-color: #D9A441;
+                color: #ffffff;
+                top: 1050px;
+                left: 0px;
+                height: 500px;
+                width: 90vw;
+                border-radius: 10px;
+                transition-duration: 0.5s;
+            }
+            .FP > h1 {
+                font-family: 'Cormorant Garamond', serif;
+                padding-left: 10px;
+                padding-top: 10px;
+                
+            }
+            .textFP {
+                position: relative;
+                padding-left: 10px;
+                width: 100%;
+                font-family: 'EB Garamond', serif; 
+                font-size: 9px;
+            }
+            .imgFP {
+                display: flex;
+                position: absolute;
+                width: 90vw;
+                height: 200px;
+                top: 230px;
+                justify-content: center;  
+                align-items: center;
+            }
+
+            .imgFP > img {
+                position: relative;
+                height: 30vw;
+                border-radius: 10px;
+                
+            }
+
+            /*12 Camapanas*/
+            .DC {
+                position: absolute;
+                background-color: #D9A441;
+                color: #ffffff;
+                top: 1570px;
+                left: 0px;
+                height: 500px;
+                width: 90vw;
+                border-radius: 10px;
+                transition-duration: 0.5s;
+            }
+            .DC > h1 {
+                font-family: 'Cormorant Garamond', serif;
+                padding-left: 10px;
+                padding-top: 10px;
+                
+            }
+            .textDC {
+                position: relative;
+                padding-left: 10px;
+                width: 100%;
+                font-family: 'EB Garamond', serif; 
+                font-size: 9px;
+            }
+            .imgDC {
+                display: flex;
+                position: absolute;
+                width: 90vw;
+                height: 200px;
+                top: 230px;
+                justify-content: center;  
+                align-items: center;
+            }
+
+            .imgDC > img {
+                position: relative;
+                height: 30vw;
+                border-radius: 10px;
+                
+            }
+
+        }
+        @media screen and (min-width: 901px)  {
+            .mostrar{
+            display: none;
+            }
+        
+            .ocultar {
+            display: none;
+            }
+        
+            .menu {
+            height: 50px;
+            justify-content: right;
+            position: static;
+            transform: translateX(0);
+            display: flex;          
+            flex-direction: row;    
+            width: 100vw;                    
+            align-items: center;    
+            gap: 20px;              
+            padding: 0 1rem;
+            }
+
+            .menu div {
+                padding: 10px 20px;
+                border-radius: 5px;
+                transition-duration: 0.5s;
+            }
+
+            .menu > div:hover {
+                background-color: #2E4057;
+                color: #8B3A3A;
+                transform: scale(1.1);
+            }
+
+            .CTitulo{
+                font-size: 20px;
+            }
+        
+            /*Semana Santa*/
+            .SS {
+                position: absolute;
+                background-color: #D9A441;
+                color: #ffffff;
+                top: 120px;
+                left: 5vw;
+                height: 500px;
+                width: 90vw;
+                border-radius: 10px;
+                transition-duration: 0.5s;
+            }
+            
+            
+            .SS > h1 {
+                font-family: 'Cormorant Garamond', serif;
+                padding-left: 10px;
+                padding-top: 10px;
+                
+            }
+        
+            .textSS {
+                position: relative;
+                padding-left: 10px;
+                width: 55%;
+                font-family: 'EB Garamond', serif; 
+                font-size: 14px;
+            }
+            
+            .imgSS {
+                display: flex;
+                position: absolute;
+                width: 15vw;
+                height: 30vw;
+                top: 8vh;
+                left: 63vw;
+                justify-content: center;  
+                align-items: center;
+            }
+
+            .imgSS > img {
+                position: relative;
+                width: 30vw;
+                height: 30vw;
+                border-radius: 10px;
+                
+            }
+            
+
+            /*Baile de los diablitos*/
+            .BD {
+                position: absolute;
+                background-color: #D9A441;
+                color: #ffffff;
+                top: 530px;
+                left: 0vw;
+                height: 500px;
+                width: 90vw;
+                border-radius: 10px;
+                transition-duration: 0.5s;
+            }
+
+            .BD > h1 {
+                font-family: 'Cormorant Garamond', serif;
+                padding-left: 10px;
+                padding-top: 10px;
+                
+            }
+            .textBD {
+                position: relative;
+                padding-left: 10px;
+                width: 55%;
+                font-family: 'EB Garamond', serif; 
+                font-size: 14px;
+            }
+            .imgBD {
+                display: flex;
+                position: absolute;
+                width: 15vw;
+                height: 30vw;
+                top: 8vh;
+                left: 63vw;
+                justify-content: center;  
+                align-items: center;
+            }
+
+            .imgBD > img {
+                position: relative;
+                width: 30vw;
+                height: 30vw;
+                border-radius: 10px;
+                
+            }
+
+            /*Feria patronal*/
+            .FP {
+                position: absolute;
+                background-color: #D9A441;
+                color: #ffffff;
+                top: 1050px;
+                left: 0vw;
+                height: 500px;
+                width: 90vw;
+                border-radius: 10px;
+                transition-duration: 0.5s;
+            }
+            
+        
+            .FP > h1 {
+                font-family: 'Cormorant Garamond', serif;
+                padding-left: 10px;
+                padding-top: 10px;
+                
+            }
+        
+            .textFP {
+                position: relative;
+                padding-left: 10px;
+                width: 55%;
+                font-family: 'EB Garamond', serif; 
+                font-size: 14px;
+            }
+        
+            .imgFP {
+                display: flex;
+                position: absolute;
+                width: 15vw;
+                height: 30vw;
+                top: 8vh;
+                left: 63vw;
+                justify-content: center;  
+                align-items: center;
+            }
+
+            .imgFP > img {
+                position: relative;
+                width: 30vw;
+                height: 30vw;
+                border-radius: 10px;
+                
+            }
+            
+            /*12 Campanas*/
+            .DC {
+                position: absolute;
+                background-color: #D9A441;
+                color: #ffffff;
+                top: 1570px;
+                left: 0vw;
+                height: 500px;
+                width: 90vw;
+                border-radius: 10px;
+                transition-duration: 0.5s;
+            }
+        
+            .DC > h1 {
+                font-family: 'Cormorant Garamond', serif;
+                padding-left: 10px;
+                padding-top: 10px;
+                
+            }
+            
+            .textDC {
+                position: relative;
+                padding-left: 10px;
+                width: 55%;
+                font-family: 'EB Garamond', serif; 
+                font-size: 14px;
+            }
+            
+            .imgDC {
+                display: flex;
+                position: absolute;
+                width: 15vw;
+                height: 30vw;
+                top: 8vh;
+                left: 63vw;
+                justify-content: center;  
+                align-items: center;
+            }
+
+            .imgDC > img {
+                position: relative;
+                width: 30vw;
+                height: 30vw;
+                border-radius: 10px;
+                
+            }
+        }
+
+    </style>
+  </head>
+  <body>
+
+    <input type="checkbox" id="desplegar">
+
+    <div class="container">
+      <label for="desplegar" class="mostrar">&#9776;</label>
+      <label for="desplegar" class="ocultar">&times;</label>  
+    </div>
+
+    <div class="menu">
+      <div class="op1"><a href="index.html">Historia</a></div>
+      <div class="op2"><a href="FESTIVIDADES.html">Festividades</a></div>
+      <div class="op3"><a href="lugarescomerciales.html">Sitios Turísticos</a></div>
+      <div class="op4"><a href="Lugareshistoricos.html">Lugares Históricos</a></div>
+    </div>
+
+     <div class="contenedor">
+        <div class="CTitulo">
+            <h1>FECHAS FESTIVAS</h1>
+        </div>
+        <div class="t SS">
+            <h1>SEMANA SANTA</h1>
+            <div class="textSS">
+                <h1>La Semana Santa en Comayagua es considerada una de las celebraciones religiosas más impresionantes y tradicionales
+                    no solo de Honduras, sino de toda Centroamérica. Este evento, profundamente arraigado en la identidad del pueblo comayagüense, 
+                    destaca por su combinación única de fe, arte, historia y participación comunitaria, convirtiéndolo en un referente regional de religiosidad popular.<br>     Fecha: 13-20 de abril
+                </h1>
+            </div>
+            <div class="imgSS">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4xQVYvX3rJOtzQJF0i5mw5BUtCa3KvyhJ3g&s" alt="imgSS">
+            </div>
+       
+        <div class="t BD">
+            <h1>BAILE DE LOS DIABLITOS</h1>
+            <div class="textBD">
+                <h1>El Baile de los Diablitos es una de las tradiciones más antiguas y emblemáticas de Comayagua, 
+                Honduras, con más de 350 años de historia. Esta festividad se celebra cada febrero y es una manifestación 
+                cultural que combina elementos religiosos y folclóricos, atrayendo tanto a locales como a turistas nacionales e internacionales.<br>
+                Fecha: 20 de enero - finales de febrero
+                </h1>
+            </div>
+            <div class="imgBD">
+                <img src="https://www.honduras.com/wp-content/uploads/2020/11/baile-del-diablo-en-Comayagua.jpg" alt="imgBD">
+            </div>
+    
+        </div>
+
+         <div class="t FP">
+            <h1>FERIA PATRONAL</h1>
+            <div class="textFP">
+                <h1>La Feria Patronal de Comayagua es una de las celebraciones más emblemáticas de Honduras, 
+                realizada cada 8 de diciembre en honor a la Virgen Inmaculada Concepción, patrona de la ciudad. Esta festividad combina fervor religioso, 
+                tradiciones culturales y actividades recreativas que atraen a miles de visitantes locales y extranjeros.<br>
+                Fecha: 8 de diciembre
+                </h1>
+            </div>
+            <div class="imgFP">
+                <img src="https://www.honduras.com/wp-content/uploads/2021/12/coma-3-1024x682.jpg" alt="imgFP">
+            </div>
+        </div>
+        <div class="t DC">
+            <h1>12 CAMPANADAS</h1>
+            <div class="textDC">
+                <h1>El Evento de las 12 Campanadas en Comayagua es una de las celebraciones más emblemáticas de Honduras para despedir 
+                    el año. Cada 31 de diciembre, miles de personas se congregan en la Plaza Central León Alvarado, frente a la 
+                    imponente Catedral de la Inmaculada Concepción, para dar la bienvenida al nuevo año al 
+                    compás de las doce campanadas emitidas por el reloj más antiguo en funcionamiento de América.<br>Fecha: 31 de diciembre
+                </h1>
+            </div>
+            <div class="imgDC">
+                <img src="https://150845871.v2.pressablecdn.com/wp-content/uploads/2015/01/Miles-de-personas-nacionales-y-extranjeros-se-congregaron-frente-a-la-catedral-de-Comayagua-para-recibir-con-las-12-campanadas-el-2015.jpg" alt="imgDC">
+            </div>
+            
+        </div>
+        
+
+      
+
+  </body>
+  </html>

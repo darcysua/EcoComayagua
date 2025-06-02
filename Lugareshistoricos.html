@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lugares Históricos de Comayagua</title>
+<style>
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #ffbd4c, #f8f1e5);
+    color: #333;
+    animation: backgroundMove 10s ease infinite alternate;
+  }
+  @keyframes backgroundMove {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+  }
+
+  header {
+    background: #8B3A3A;
+    color: #fff;
+    text-align: center;
+    padding: 1.2rem;
+    position: relative;
+  }
+  header h1 {
+    font-size: 2rem;
+    margin-bottom: 0.3rem;
+    animation: fadeInDown 1.5s ease forwards;
+  }
+  header p {
+    font-style: italic;
+    animation: typing 4s steps(40, end) infinite;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 2px solid #fff;
+    width: 25ch;
+    margin: auto;
+  }
+  @keyframes typing {
+    0% { width: 0; }
+    50% { width: 25ch; }
+    100% { width: 0; }
+  }
+  @keyframes fadeInDown {
+    from {opacity: 0; transform: translateY(-20px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
+
+  /* NUEVO: Menú hamburguesa responsivo estilo pantalla completa */
+#menu-toggle {
+    display: none;
+    background-color: #8B3A3A;
+  }
+  .menu-btn-container {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1001;
+    border: #333 10px;
+  }
+  .menu-open, .menu-close {
+    font-size: 2rem;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  .menu-close {
+    display: none;
+  }
+  #menu-toggle:checked ~ .menu-btn-container .menu-open {
+    display: none;
+  }
+  #menu-toggle:checked ~ .menu-btn-container .menu-close {
+    display: inline;
+  }
+  nav.menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 400px;
+    height: 100vh;
+    background: linear-gradient(135deg, #8B3A3A, #a64545);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    transform: translateX(0);
+    transition: right 0.4s ease;
+    z-index: 1000;
+  }
+  #menu-toggle:checked ~ nav.menu {
+    right: 0;
+  }
+  nav.menu a {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 15px 30px;
+    border-radius: 25px;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    transition: all 0.8s ease;
+    text-align: center;
+    min-width: 200px;
+  }
+  nav.menu :hover {
+    background: rgba(255,255,255,0.2);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  }
+
+  @media (min-width: 768px) {
+    .menu-btn-container {
+      display: none;
+    }
+    nav.menu {
+      position: static;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      height: auto;
+      background: transparent;
+      width: 100%;
+      transform: none;
+      gap: 20px;
+      padding-top: 1rem;
+      transition: all 0.8s ease;
+    }
+    nav.menu a {
+      background: none;
+      font-size: 1rem;
+      padding: 10px 20px;
+      min-width: auto;
+      color:#333
+    }
+    nav.menu a:hover {
+      background: rgba(255,255,255,0.2);
+    }
+  }
+
+  header p {
+    font-style: italic;
+    animation: typing 4s steps(40, end) infinite;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 2px solid #fff;
+    width: 25ch;
+    margin: auto;
+  }
+  @keyframes typing {
+    0% { width: 0; }
+    50% { width: 25ch; }
+    100% { width: 0; }
+  }
+
+  @keyframes fadeInDown {
+    from {opacity: 0; transform: translateY(-20px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
+
+  .slider {
+    max-width: 1000px;
+    margin: 20px auto;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    display: flex;
+    gap: 15px;
+    padding-bottom: 15px;
+  }
+  .slider::-webkit-scrollbar {
+    height: 8px;
+  }
+  .slider::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  .slider::-webkit-scrollbar-thumb {
+    background: #8B3A3A;
+    border-radius: 4px;
+  }
+
+  .slide {
+    scroll-snap-align: start;
+    flex: 0 0 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    position: relative;
+
+  }
+
+  .slide:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 20px rgba(0,0,0,0.4);
+  }
+
+  .slide img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 15px 15px 0 0;
+    filter: brightness(1.05) contrast(1.05);
+    transition: filter 0.3s ease;
+  }
+
+  .slide:hover img {
+    filter: brightness(1.15) contrast(1.15);
+  }
+
+  .info {
+    padding: 20px;
+  }
+
+  .info h2 {
+    color: #8B3A3A;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    position: relative;
+    animation: fadeIn 1.5s ease forwards;
+  }
+
+  .info h2::before {
+    content: "\2728 ";
+    animation: pulseIcon 2s infinite;
+  }
+
+  @keyframes pulseIcon {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.3); }
+  }
+
+  .info p {
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+  footer{
+    margin-top:50px;
+    background-color: #6A845C;
+    color:white;
+    font-size: 18px;
+    text-align: center;
+    padding:30px;
+  }
+
+  audio {
+    display: none;
+  }
+
+  @media (max-width: 480px) {
+
+    .slider {
+      flex-direction: column;
+      overflow-x: hidden;
+      overflow-y: auto;
+      max-height: 90vh;
+      scroll-snap-type: y mandatory;
+      padding: 0 10px 10px 10px;
+    }
+    .slide {
+      flex: none;
+      width: 100%;
+      margin-bottom: 20px;
+      scroll-snap-align: start;
+      height: 400px;
+    }
+    .slide img {
+      height: 220px;
+    }
+    .info {
+      padding: 12px;
+    }
+    .info h2 {
+      font-size: 1.2rem;
+    }
+    .info p {
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (min-width: 481px) and (max-width: 768px) {
+  nav.menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: auto;
+    background: linear-gradient(135deg, #8B3A3A, #a64545);
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 10px;
+    padding: 0.8rem 0.5rem;
+    transform: translateY(-100%);
+    transition: transform 0.4s ease;
+    z-index: 1000;
+  }
+
+  #menu-toggle:checked ~ nav.menu {
+    transform: translateY(0);
+  }
+
+  .menu-btn-container {
+    display: block;
+  }
+
+  nav.menu a {
+    font-size: 1rem;
+    color: white;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 8px 12px;
+    border-radius: 15px;
+    min-width: auto;
+    white-space: nowrap;
+    text-align: center;
+    transition: background 0.3s ease;
+  }
+
+  nav.menu a:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+}
+
+    .slide {
+      flex: 0 0 80%;
+      height: 500px;
+    }
+    .slide img {
+      height: 300px;
+    }
+    .info {
+      padding: 16px;
+    }
+    .info h2 {
+      font-size: 1.4rem;
+    }
+    .info p {
+      font-size: 1rem;
+    }
+  
+
+  @media (min-width: 1024px) {
+    .slider {
+      height: 100vh;
+      align-items: center;
+    }
+
+    .slide {
+      flex: 0 0 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 0;
+    }
+
+    .slide-content {
+      width: 80%;
+      max-width: 1000px;
+      height: 85%;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .slide-content img {
+      height: 60%;
+      object-fit: cover;
+      border-radius: 20px 20px 0 0;
+    }
+
+    .info {
+      position: static;
+      background: #fff;
+      padding: 1.5rem;
+      box-shadow: none;
+      width: 100%;
+      border-radius: 0 0 20px 20px;
+    }
+
+    .slider-controls {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .slider-controls button {
+      background: rgba(139, 58, 58, 0.8);
+      color: #fff;
+      border: none;
+      font-size: 2rem;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      border-radius: 10px;
+      pointer-events: auto;
+      transition: background 0.3s;
+    }
+
+    .slider-controls button:hover {
+      background: rgba(139, 58, 58, 1);
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Lugares Históricos de Comayagua</h1>
+  <p>Desliza para descubrir el patrimonio histórico</p>
+</header>
+
+<input type="checkbox" id="menu-toggle">
+<div class="menu-btn-container">
+  <label for="menu-toggle" class="menu-open">&#9776;</label>
+  <label for="menu-toggle" class="menu-close">&times;</label>
+</div>
+
+<nav class="menu">
+  <a href="index.html" class="op1">Historia</a>
+  <a href="FESTIVIDADES.html" class="op2">Festividades</a>
+  <a href="lugarescomerciales.html" class="op3">Sitios Turísticos</a>
+  <a href="Lugareshistoricos.html" class="op4">Lugares Históricos</a>
+</nav>
+
+<section class="slider" aria-label="Carrusel de lugares históricos de Comayagua">
+
+  <article class="slide">
+    <div class="slide-content">
+      <img src="https://www.espaciohonduras.net/images/Honduras/Turismo/comayagua/Catedral_de_la_Inmaculada_Concepcion/Catedral_de_la_Inmaculada_Concepcion.jpg" alt="Catedral de la Inmaculada Concepción" />
+      <div class="info">
+        <h2>🏛️ Catedral de la Inmaculada Concepción</h2>
+        <p><strong>Construcción:</strong> 1634 - 1715</p>
+        <p><strong>Dato curioso:</strong> Posee el reloj más antiguo de América, traído desde España.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="slide">
+    <div class="slide-content">
+      <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/c0/8d/41/getlstd-property-photo.jpg?w=500&h=-1&s=1" alt="Palacio Episcopal" />
+      <div class="info">
+        <h2>🏛️ Palacio Episcopal (Museo de Arte Religioso)</h2>
+        <p>Residencia histórica de obispos convertida en museo con arte colonial.</p>
+        <p>Exhibe pinturas, vestimentas y objetos religiosos antiguos.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="slide">
+    <div class="slide-content">
+      <img src="https://i.pinimg.com/736x/45/fc/9a/45fc9adcebe69c172d1a398c04a7b04c.jpg" alt="Plaza Central León Alvarado" />
+      <div class="info">
+        <h2>🏞️ Plaza Central León Alvarado</h2>
+        <p>Centro neurálgico de la ciudad, con fuentes y jardines para el disfrute.</p>
+        <p>Sede de festivales y actos cívicos importantes.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="slide">
+    <div class="slide-content">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Iglesia_de_la_merced_de_Comayagua.jpg" alt="Iglesia La Merced" />
+      <div class="info">
+        <h2>⛪ Iglesia La Merced</h2>
+        <p>Fachada barroca del siglo XVI, interior con altares y esculturas coloniales.</p>
+        <p>Fundada en 1550, pieza clave del patrimonio religioso.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="slide">
+    <div class="slide-content">
+      <img src="https://i0.wp.com/www.hondurastips.hn/wp-content/uploads/2012/10/coma-9.jpg?resize=810%2C518&ssl=1" alt="Iglesia San Francisco" />
+      <div class="info">
+        <h2>⛪ Iglesia San Francisco</h2>
+        <p>Construida en 1560, parte de un antiguo convento franciscano.</p>
+        <p>Uno de los primeros templos franciscanos en Honduras.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="slide">
+    <div class="slide-content">
+      <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1d/fe/07/2c/caption.jpg?w=1200&h=-1&s=1" alt="Casa de la Cultura" />
+      <div class="info">
+        <h2>🎭 Casa de la Cultura</h2>
+        <p>Espacio para talleres, exposiciones y promoción de arte local.</p>
+        <p>Ubicada en el centro histórico, un foco cultural vital.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="slide">
+    <div class="slide-content">
+      <img src="https://tiempo.hn/wp-content/uploads/2024/03/Diseno-sin-titulo-23-3.jpg" alt="Museo de Comayagua" />
+      <div class="info">
+        <h2>🏛️ Museo de Comayagua</h2>
+        <p>Instalado en el antiguo Palacio de Justicia, con piezas arqueológicas.</p>
+        <p>Documenta la historia regional y nacional con artefactos valiosos.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="slide">
+    <div class="slide-content">
+      <img src="https://cdn.latribuna.hn/wp-content/uploads/2016/09/Viejo-Cuartel-de-Comayagua-770x470.jpg" alt="Antiguo Cuartel" />
+      <div class="info">
+        <h2>🏰 Antiguo Cuartel</h2>
+        <p>Actualmente espacio cultural que conserva la memoria histórica militar.</p>
+        <p>Ejemplo del poder colonial en Honduras.</p>
+      </div>
+    </div>
+  </article>
+
+</section>
+
+<div class="slider-controls">
+  <button onclick="scrollSlider(-1)">&#8592;</button>
+  <button onclick="scrollSlider(1)">&#8594;</button>
+</div>
+
+<footer>
+  <h4>Información de Contacto</h4>
+  <p>📍 Centro Histórico de Comayagua</p>
+  <p>📞 +504 2772-0000</p>
+  <p>✉️ @ecocomayagua.hn</p>
+  <div class="footer-bottom"></div><br>
+  <p>&copy; 2025 Eco Comayagua. Todos los derechos reservados. | Desarrollado para promover el turismo en Honduras</p>
+</footer>
+
+<script>
+  function scrollSlider(direction) {
+    const slider = document.querySelector('.slider');
+    const slideWidth = slider.querySelector('.slide').offsetWidth;
+    slider.scrollBy({
+      left: direction * slideWidth,
+      behavior: 'smooth'
+    });
+  }
+</script>
+
+</body>
+</html>
